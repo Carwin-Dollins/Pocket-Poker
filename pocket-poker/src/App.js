@@ -1,17 +1,23 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import NavigationBar from "./components/NavigationBar";
+import SB from './pages/SB';
+import Report from './pages/Report'
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <NavigationBar />
+      <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
+          <Route path ="/" element={<Home />}/>
+          <Route path ="/Login" element={<Login />}/>
+          <Route path ="/SB" element={<SB />}/>
+          <Route path ="/Report" element={<Report />}/>
         </Routes>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }

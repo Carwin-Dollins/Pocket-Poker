@@ -23,7 +23,7 @@ function NavigationBar() {
               </Dropdown.Toggle>
               <Dropdown.Menu className="dropdown-menu-right">
                 <Dropdown.Item href="/login">Log In</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Sign Up</Dropdown.Item>
+                <Dropdown.Item href="/Register">Sign Up</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Nav>

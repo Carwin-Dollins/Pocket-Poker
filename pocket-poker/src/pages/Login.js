@@ -7,14 +7,23 @@ const Login = (props) => {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-
+  const [SignInError, setSignInError] = useState('')
+  const [SignInSuccess, setSignInSuccess] = useState('')
   const navigate = useNavigate()
 
   const onButtonClick = async() => {
     // You'll update this function later...
-    const loginAttempt = await supabase.auth.signInWithPassword({'email':email, 'password':password})
+    const { data, error } = await supabase.auth.signInWithPassword({'email':email, 'password':password})
     const session = supabase.auth.getSession()
-    console.log(session, loginAttempt)
+    console.log(session, data,error)
+    if(data) {
+      setSignInSuccess("Logged in Successfully.")
+      setSignInError("")
+    }
+    if(error){
+      setSignInError("Error: Password and/or email is wrong. Try again.")
+      setSignInSuccess("")
+    }
   }
 
   return (
@@ -47,6 +56,8 @@ const Login = (props) => {
       <div className={'inputContainer'}>
         <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'} />
       </div>
+      <label className="errorLabel">{SignInError}</label>
+      <label className="errorLabel">{SignInSuccess}</label>
     </div>
   )
 }

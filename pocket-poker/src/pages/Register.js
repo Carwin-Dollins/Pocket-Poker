@@ -33,16 +33,17 @@ const Register = (props) => {
     setPasswordError("")
     setEmailError("")
     setUsernameError("")
-    const signup = await fetch('/api/signup', {
-        method: 'POST',
-        'username': username,
+    const  { data, error } = await supabase.auth.signUp({
+        'email': email,
         'password': password,
-        'name': name,
-        'email': email
+        options: {
+          data: {
+          'name': name,
+          'username' :username
+        }
+      }
     })
-    
-    console.log(signup)
-    console.log(passwordError)
+    console.log(data)
   }
 
  

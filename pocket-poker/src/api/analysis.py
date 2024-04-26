@@ -179,7 +179,7 @@ def dbReport():
             if (i["hand_wins"] + i["hand_losses"] == 0):
                 winRates.append(0) #if no games then basically put its winrate as 0
             else: #otherwise append the real win rates
-                winRates.append((i["hand_wins"] / i["hand_wins"] + i["hand_losses"]) *  100 )
+                winRates.append((i["hand_wins"] / (i["hand_wins"] + i["hand_losses"])) *  100 )
    
         #create table
 

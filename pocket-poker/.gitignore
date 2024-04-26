@@ -9,9 +9,7 @@
 __pycache__
 
 # api
-globalWinRates.png
 indWinRate.png
-globalHandWinRate.png
 achievements.csv
 
 # testing

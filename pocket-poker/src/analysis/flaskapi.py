@@ -4,11 +4,12 @@ from analysis import dbReport, playerReport
 app = Flask(__name__)
 
 #generate user report
-@app.route('/analysis/user/<int:userId>')
+@app.route('/analysis/user/<int:player_id>')
 
-def playerGraphs( userId : int) :
+#uses the player_id from player stats 
+def playerGraphs( player_id : int) :
 
-    playerReport(userId)
+    playerReport(player_id)
     return "process done"
 
 @app.route('/analysis/database')

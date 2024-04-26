@@ -1,4 +1,6 @@
 from flask import Flask 
+import flask
+import json
 from analysis import dbReport, playerReport
 
 app = Flask(__name__)
@@ -9,7 +11,7 @@ app = Flask(__name__)
 #uses the player_id from player stats 
 def playerGraphs( player_id : int) :
 
-    return playerReport(player_id)
+    return flask.jsonify(playerReport(player_id))
 
 @app.route('/analysis/database')
 
@@ -17,7 +19,7 @@ def playerGraphs( player_id : int) :
 
 def databaseGraphs() :
 
-    return dbReport()
+    return flask.jsonify(dbReport())
 
 if __name__ == "__main__":
     app.run()

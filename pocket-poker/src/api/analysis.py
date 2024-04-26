@@ -187,7 +187,7 @@ def dbReport():
         plt.xticks(fontsize = 13)
         plt.yticks(fontsize = 13)
         plt.title("Win rates given a hand")
-        plt.savefig("indWinRate.png")
+        plt.savefig("globalHandWinRate.png")
         #plt.show() #for debugging
 
         for i in data.data:
@@ -227,7 +227,7 @@ def dbReport():
             plt.figure(figsize = (20,10))
             plt.pie(earningRates, labels = names,  autopct='%1.2f%%')
             plt.legend()
-            plt.savefig("earningRates.png")
+            plt.savefig("globalEarningRates.png")
             #plt.show() #for debugging
 
     else:

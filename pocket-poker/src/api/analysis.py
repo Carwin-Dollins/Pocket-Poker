@@ -26,6 +26,7 @@ def playerReport():
     losses = [0,0,0,0,0,0,0,0,0,0] #losses on a hand
     handRate = [0,0,0,0,0,0,0,0,0,0] #win rates of hands
 
+    totalGames = 0
     #look for the player's wins/losses
     data = supabase.table("player_stats").select("wins, losses, level").eq("id", u_id).execute()
     
@@ -139,13 +140,13 @@ def playerReport():
         plt.title(f"Gains lost given a hand \nOverall lost gains {lostGains}", fontsize = 25)
         plt.savefig("playerLosses.png")
         #plt.show() #for debugging
-        return totalGames
 
     else:
         print("no games to graph")
     
     checkCsv() #check if we have a csv file and create if needed
     checkAchievements(u_id, wins)
+    return totalGames #return the total games
 
 def dbReport():
     
@@ -228,10 +229,11 @@ def dbReport():
             plt.legend()
             plt.savefig("earningRates.png")
             #plt.show() #for debugging
-        return totalGames
 
     else:
         print("No Query data Returned")
+    
+    return totalGames #games either 0 or updated
 
 #just makes sure we have a csv if not we just make a new one so our achievements dont error out
 

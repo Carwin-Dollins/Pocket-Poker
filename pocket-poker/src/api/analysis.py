@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 #requires you to do 
 #pip3 install matplotlib 
-#pip3 install pands
+#pip3 install pandas
 #pip3 install supabase
 
 #url and key for our database and then allowing ourselves to create a client object to make queries to the database
@@ -20,7 +20,7 @@ achFile = "achievements.csv"
 
 #given the id we will generate a report for the player
 
-def playerReport(u_id):
+def playerReport():
   
     wins = [0,0,0,0,0,0,0,0,0,0] #wins with a hand
     losses = [0,0,0,0,0,0,0,0,0,0] #losses on a hand
@@ -84,8 +84,8 @@ def playerReport(u_id):
     
         for i in data.data:
             losses[i["losing_hand_id"]] += 1
-            lostGains += i["prizePool"]
-            lostGainsPerHand["losing_hand_id"] += i["prizePool"]
+            lostGains += i["prize_pool"]
+            lostGainsPerHand[i["losing_hand_id"]] += i["prize_pool"]
     else:
         print("user has no losses")
 
@@ -139,6 +139,7 @@ def playerReport(u_id):
         plt.title(f"Gains lost given a hand \nOverall lost gains {lostGains}", fontsize = 25)
         plt.savefig("playerLosses.png")
         #plt.show() #for debugging
+        return totalGames
 
     else:
         print("no games to graph")
@@ -227,6 +228,7 @@ def dbReport():
             plt.legend()
             plt.savefig("earningRates.png")
             #plt.show() #for debugging
+        return totalGames
 
     else:
         print("No Query data Returned")
@@ -284,4 +286,3 @@ def checkAchievements(u_id, vals):
     else: #if in our csv file
         df.loc[row[0]] = dat
         df.to_csv(achFile, index = False)
-

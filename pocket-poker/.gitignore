@@ -6,6 +6,13 @@
 .pnp.js
 /venv
 *Venv
+__pycache__
+
+# api
+globalWinRates.png
+indWinRate.png
+achievements.csv
+
 # testing
 /coverage
 

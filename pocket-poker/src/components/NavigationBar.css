@@ -1,7 +1,7 @@
 /************ Navbar Css ************/
 nav.navbar {
     padding-right: 5px 0;
-    position: fixed;
+    position: sticky;
     width: 100%;
     top: 0;
     z-index: 9999;

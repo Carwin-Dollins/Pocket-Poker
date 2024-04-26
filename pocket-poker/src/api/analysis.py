@@ -115,6 +115,7 @@ def playerReport():
         plt.yticks(fontsize = 13)
         plt.title(f"Win rates given a hand \nOverall Win Rate {winRate}%", fontsize = 25)
         plt.savefig("playerHandWinRate.png")
+        plt.close()
         #plt.show() #for debugging
         
         #now make the earnings graph
@@ -127,6 +128,7 @@ def playerReport():
         plt.yticks(fontsize = 13)
         plt.title(f"Earnings given a hand \nOverall earnings {gains}", fontsize = 25)
         plt.savefig("playerEarnings.png")
+        plt.close()
         #plt.show() #for debugging
         
         #now for losses graph
@@ -139,6 +141,7 @@ def playerReport():
         plt.yticks(fontsize = 13)
         plt.title(f"Gains lost given a hand \nOverall lost gains {lostGains}", fontsize = 25)
         plt.savefig("playerLosses.png")
+        plt.close()
         #plt.show() #for debugging
 
     else:
@@ -228,6 +231,7 @@ def dbReport():
             plt.pie(earningRates, labels = names,  autopct='%1.2f%%')
             plt.legend()
             plt.savefig("globalEarningRates.png")
+            plt.close()
             #plt.show() #for debugging
 
     else:

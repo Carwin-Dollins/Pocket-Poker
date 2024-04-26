@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 #requires you to do 
 #pip3 install matplotlib 
-#pip3 install pands
+#pip3 install pandas
 #pip3 install supabase
 
 #url and key for our database and then allowing ourselves to create a client object to make queries to the database
@@ -20,12 +20,13 @@ achFile = "achievements.csv"
 
 #given the id we will generate a report for the player
 
-def playerReport(u_id):
+def playerReport():
   
     wins = [0,0,0,0,0,0,0,0,0,0] #wins with a hand
     losses = [0,0,0,0,0,0,0,0,0,0] #losses on a hand
     handRate = [0,0,0,0,0,0,0,0,0,0] #win rates of hands
 
+    totalGames = 0
     #look for the player's wins/losses
     data = supabase.table("player_stats").select("wins, losses, level").eq("id", u_id).execute()
     
@@ -84,8 +85,8 @@ def playerReport(u_id):
     
         for i in data.data:
             losses[i["losing_hand_id"]] += 1
-            lostGains += i["prizePool"]
-            lostGainsPerHand["losing_hand_id"] += i["prizePool"]
+            lostGains += i["prize_pool"]
+            lostGainsPerHand[i["losing_hand_id"]] += i["prize_pool"]
     else:
         print("user has no losses")
 
@@ -114,6 +115,7 @@ def playerReport(u_id):
         plt.yticks(fontsize = 13)
         plt.title(f"Win rates given a hand \nOverall Win Rate {winRate}%", fontsize = 25)
         plt.savefig("playerHandWinRate.png")
+        plt.close()
         #plt.show() #for debugging
         
         #now make the earnings graph
@@ -126,6 +128,7 @@ def playerReport(u_id):
         plt.yticks(fontsize = 13)
         plt.title(f"Earnings given a hand \nOverall earnings {gains}", fontsize = 25)
         plt.savefig("playerEarnings.png")
+        plt.close()
         #plt.show() #for debugging
         
         #now for losses graph
@@ -138,6 +141,7 @@ def playerReport(u_id):
         plt.yticks(fontsize = 13)
         plt.title(f"Gains lost given a hand \nOverall lost gains {lostGains}", fontsize = 25)
         plt.savefig("playerLosses.png")
+        plt.close()
         #plt.show() #for debugging
 
     else:
@@ -145,6 +149,7 @@ def playerReport(u_id):
     
     checkCsv() #check if we have a csv file and create if needed
     checkAchievements(u_id, wins)
+    return totalGames #return the total games
 
 def dbReport():
     
@@ -174,7 +179,7 @@ def dbReport():
             if (i["hand_wins"] + i["hand_losses"] == 0):
                 winRates.append(0) #if no games then basically put its winrate as 0
             else: #otherwise append the real win rates
-                winRates.append((i["hand_wins"] / i["hand_wins"] + i["hand_losses"]) *  100 )
+                winRates.append((i["hand_wins"] / (i["hand_wins"] + i["hand_losses"])) *  100 )
    
         #create table
 
@@ -185,7 +190,7 @@ def dbReport():
         plt.xticks(fontsize = 13)
         plt.yticks(fontsize = 13)
         plt.title("Win rates given a hand")
-        plt.savefig("indWinRate.png")
+        plt.savefig("globalHandWinRate.png")
         #plt.show() #for debugging
 
         for i in data.data:
@@ -225,11 +230,14 @@ def dbReport():
             plt.figure(figsize = (20,10))
             plt.pie(earningRates, labels = names,  autopct='%1.2f%%')
             plt.legend()
-            plt.savefig("earningRates.png")
+            plt.savefig("globalEarningRates.png")
+            plt.close()
             #plt.show() #for debugging
 
     else:
         print("No Query data Returned")
+    
+    return totalGames #games either 0 or updated
 
 #just makes sure we have a csv if not we just make a new one so our achievements dont error out
 
@@ -284,4 +292,3 @@ def checkAchievements(u_id, vals):
     else: #if in our csv file
         df.loc[row[0]] = dat
         df.to_csv(achFile, index = False)
-

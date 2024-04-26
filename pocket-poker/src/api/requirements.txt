@@ -23,3 +23,5 @@ StrEnum==0.4.15
 supafunc==0.3.3
 typing_extensions==4.10.0
 websockets==11.0.3
+python-dotenv==1.0.1
+flask==3.0.3

@@ -25,7 +25,6 @@ export const Home = () => {
     // winner = 1 if player wins
     // winner = -1 if bot wins
     // winner = 0 if there is a tie
-    // winningHandId
     const handleResults = (winner, prizePool, winningHandId, losingHandId) => {
         console.log(`From JS: ${winner}, ${prizePool}, ${winningHandId}, ${losingHandId}`);
     }

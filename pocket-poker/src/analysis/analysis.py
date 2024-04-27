@@ -112,6 +112,7 @@ def playerReport(u_id : int) -> int:
         plt.ylabel("Win Rate %", fontsize = 20)
         plt.xticks(fontsize = 13)
         plt.yticks(fontsize = 13)
+        plt.ylim(bottom = 0, top = 100)
         plt.title(f"Win rates given a hand \nOverall Win Rate {winRate}%", fontsize = 25)
         plt.savefig("playerHandWinRate.png")
         #plt.show() #for debugging
@@ -186,6 +187,7 @@ def dbReport():
         plt.ylabel("Win Rate %")
         plt.xticks(fontsize = 13)
         plt.yticks(fontsize = 13)
+        plt.ylim(bottom = 0, top = 100)
         plt.title("Win rates given a hand")
         plt.savefig("indWinRate.png")
         #plt.show() #for debugging

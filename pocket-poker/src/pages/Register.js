@@ -12,7 +12,6 @@ const Register = (props) => {
   const [nameError, setnameError] = useState('')
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const [RegistrationError, setRegistrationError] = useState('')
   const [Registered, setRegistered] = useState('')
   const navigate = useNavigate()
 
@@ -46,14 +45,13 @@ const Register = (props) => {
     })
     console.log(data, error)
 
-    if(data) {
+    if(data && !error) {
       setRegistered("Successfully created account")
-      setRegistrationError("")
+      navigate('/')
     }
 
     if(error) {
-      setRegistrationError("Error creating account")
-      setRegistered("")
+      setRegistered("Error creating account")
     }
     
   }
@@ -116,9 +114,8 @@ const Register = (props) => {
       </div>
       <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Sign in'} />
+        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Sign Up'} />
       </div>
-      <label className="errorLabel" style={{fontSize: 20 + 'px'}}>{RegistrationError}</label>
       <label className="errorLabel" style={{fontSize: 20 + 'px', color: 'black'}}>{Registered}</label>
     </div>
   )

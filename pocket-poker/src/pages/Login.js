@@ -7,22 +7,25 @@ const Login = (props) => {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const [SignInError, setSignInError] = useState('')
-  const [SignInSuccess, setSignInSuccess] = useState('')
+  const [SignInStatus, setSignInStatus] = useState('')
+  const [userSession, setUserSession] = useState({})
   const navigate = useNavigate()
 
+
+  //Logs the user in and redirects to home them if successful
+  //If the login fails it shows a fail label
   const onButtonClick = async() => {
     // You'll update this function later...
     const { data, error } = await supabase.auth.signInWithPassword({'email':email, 'password':password})
     const session = supabase.auth.getSession()
     console.log(session, data,error)
-    if(data) {
-      setSignInSuccess("Logged in Successfully.")
-      setSignInError("")
+    if(data && !error) {
+      setSignInStatus("Logged in Successfully.")
+      setUserSession(session)
+      navigate('/')
     }
     if(error){
-      setSignInError("Error: Password and/or email is wrong. Try again.")
-      setSignInSuccess("")
+      setSignInStatus("Error: Password and/or email is wrong. Try again.")
     }
   }
 
@@ -56,8 +59,7 @@ const Login = (props) => {
       <div className={'inputContainer'}>
         <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'} />
       </div>
-      <label className="errorLabel">{SignInError}</label>
-      <label className="errorLabel">{SignInSuccess}</label>
+      <label className="errorLabel">{SignInStatus}</label>
     </div>
   )
 }

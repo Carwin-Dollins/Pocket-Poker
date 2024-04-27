@@ -113,7 +113,8 @@ def playerReport(u_id : int) -> int:
         plt.ylabel("Win Rate %", fontsize = 20)
         plt.xticks(fontsize = 13)
         plt.yticks(fontsize = 13)
-        plt.title(f"Win rates given a hand \nOverall Win Rate {winRate}%", fontsize = 25)
+        plt.ylim(bottom = 0, top = 100)
+        plt.title(f"Win rates given a hand \nOverall Win Rate {winRate:.2f}%", fontsize = 25)
         plt.savefig("playerHandWinRate.png")
         #plt.show() #for debugging
         
@@ -125,7 +126,7 @@ def playerReport(u_id : int) -> int:
         plt.ylabel("Gains", fontsize = 20)
         plt.xticks(fontsize = 13)
         plt.yticks(fontsize = 13)
-        plt.title(f"Earnings given a hand \nOverall earnings {gains}", fontsize = 25)
+        plt.title(f"Earnings given a hand \nOverall earnings {gains:.2f}", fontsize = 25)
         plt.savefig("playerEarnings.png")
         #plt.show() #for debugging
         
@@ -137,7 +138,7 @@ def playerReport(u_id : int) -> int:
         plt.ylabel("Lost Gains", fontsize = 20)
         plt.xticks(fontsize = 13)
         plt.yticks(fontsize = 13)
-        plt.title(f"Gains lost given a hand \nOverall lost gains {lostGains}", fontsize = 25)
+        plt.title(f"Gains lost given a hand \nOverall lost gains {lostGains:.2f}", fontsize = 25)
         plt.savefig("playerLosses.png")
         #plt.show() #for debugging
 
@@ -186,6 +187,7 @@ def dbReport() -> int:
         plt.ylabel("Win Rate %")
         plt.xticks(fontsize = 13)
         plt.yticks(fontsize = 13)
+        plt.ylim(bottom = 0, top = 100)
         plt.title("Win rates given a hand")
         plt.savefig("globalHandWinRate.png")
         #plt.show() #for debugging

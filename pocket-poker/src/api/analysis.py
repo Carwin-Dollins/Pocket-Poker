@@ -2,6 +2,8 @@ import os
 import pandas as pd
 from supabase import create_client, Client
 import matplotlib.pyplot as plt
+import matplotlib 
+matplotlib.use('agg')
 
 #requires you to do 
 #pip3 install matplotlib 

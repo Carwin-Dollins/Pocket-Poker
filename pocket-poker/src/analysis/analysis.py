@@ -146,6 +146,8 @@ def playerReport(u_id : int) -> int:
     checkCsv() #check if we have a csv file and create if needed
     checkAchievements(u_id, wins)
 
+#will generate a report for the database
+
 def dbReport():
     
     winRates = [] #individual rates given the hand

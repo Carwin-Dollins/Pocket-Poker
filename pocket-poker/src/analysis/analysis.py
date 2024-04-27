@@ -20,7 +20,7 @@ achFile = "achievements.csv"
 
 #given the id we will generate a report for the player
 
-def playerReport(u_id):
+def playerReport(u_id : int) -> int:
   
     wins = [0,0,0,0,0,0,0,0,0,0] #wins with a hand
     losses = [0,0,0,0,0,0,0,0,0,0] #losses on a hand
@@ -174,7 +174,7 @@ def dbReport():
             if (i["hand_wins"] + i["hand_losses"] == 0):
                 winRates.append(0) #if no games then basically put its winrate as 0
             else: #otherwise append the real win rates
-                winRates.append((i["hand_wins"] / i["hand_wins"] + i["hand_losses"]) *  100 )
+                winRates.append((i["hand_wins"] / (i["hand_wins"] + i["hand_losses"])) *  100 )
    
         #create table
 

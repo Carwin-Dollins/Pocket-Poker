@@ -1,20 +1,52 @@
+import React from "react";
+import { Unity, useUnityContext } from "react-unity-webgl";
+import { useState, useCallback, useEffect } from "react";
+import { Fragment } from "react";
 
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { createClient } from "@supabase/supabase-js"
-const supabase = createClient("https://hplnxayyijxebyklpoiz.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwbG54YXl5aWp4ZWJ5a2xwb2l6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk0MTQyMjcsImV4cCI6MjAyNDk5MDIyN30.8XJMoHKCQp_dWVaK1p73HtUQlGWWEz2hu-nAi7gNr8s");
-export const Home = (props) => {
-    try {
-    const session = supabase.auth.getSession()
-    console.log(session)
-    } catch(e) {
-        console.log(e)
+// const { unityProvider } = useUnityContext({
+//     loaderUrl: "Build/poker-webgl.loader.js",
+//     dataUrl: "Build/poker-webgl.data",
+//     frameworkUrl: "Build/poker-webgl.framework.js",
+//     codeUrl: "Build/poker-webgl.wasm",
+//   });
+
+  
+export const Home = () => {
+    const { unityProvider, addEventListener, removeEventListener } =
+        useUnityContext({
+            loaderUrl: "Build/poker-webgl.loader.js",
+            dataUrl: "Build/poker-webgl.data",
+            frameworkUrl: "Build/poker-webgl.framework.js",
+            codeUrl: "Build/poker-webgl.wasm",
+    });
+
+
+    // Upload data to Supabase here
+    // winner = 1 if player wins
+    // winner = -1 if bot wins
+    // winner = 0 if there is a tie
+    const handleResults = (winner, prizePool, winningHandId, losingHandId) => {
+        console.log(`From JS: ${winner}, ${prizePool}, ${winningHandId}, ${losingHandId}`);
     }
-    return(
-        <div>
-            
-        </div>
-    )
+  
+    useEffect(() => {
+      addEventListener("handleResults", handleResults);
+      return () => {
+        removeEventListener("handleResults", handleResults);
+      };
+    }, [addEventListener, removeEventListener, handleResults]);
+  
+    return (
+      <Fragment>
+        <Unity
+            style={{
+                width: "80%",
+                justifySelf: "center",
+                alignSelf: "center",
+            }}
+            unityProvider={unityProvider}
+        />
+      </Fragment>
+    );
 }
-
 export default Home;

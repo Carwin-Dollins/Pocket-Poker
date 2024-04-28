@@ -1,5 +1,14 @@
 # Pocket-Poker
-Group 40 Project
+Group 40.
+This project involves the team creating a poker game that 
+collects data on winning hands and process that collected 
+data to create a report for players to see previous game 
+data and improve their gameplay for future games. There 
+are multiple portions of the project that were built: a 
+front-end web app, the poker game built using Unity, 
+back-end app, a database, and an analysis engine. Users 
+should be able to play a virtual poker game using 
+simulated money to enhance their skills
 
 # Setup
 ### overall setup

@@ -4,7 +4,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown'; // Import Dropdown component
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavigationBar.css';
-
 function NavigationBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">

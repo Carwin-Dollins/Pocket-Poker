@@ -152,7 +152,9 @@ def playerReport(u_id : int) -> int:
     
     checkCsv() #check if we have a csv file and create if needed
     checkAchievements(u_id, wins)
-    return totalGames #return the total games
+    return {
+        "t_games": totalGames
+    }
 
 def dbReport() -> int:
     
@@ -243,7 +245,9 @@ def dbReport() -> int:
     else:
         print("No Query data Returned")
     
-    return totalGames #games either 0 or updated
+    return {
+        "t_games": totalGames
+    }
 
 #just makes sure we have a csv if not we just make a new one so our achievements dont error out
 

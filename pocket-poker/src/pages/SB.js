@@ -16,17 +16,20 @@ function SB() {
     }
 
     return (
-      <ol>
-        {player_stats.map((player) => (
-          <><li key={player.username}>{player.username}</li><ul>
-            <li key={player.name}>name: {player.name}</li>
-            <li key={player.email}>email: {player.email}</li>
-            <li key={player.id}>id: {player.id}</li>
-            <li key={player.wins}>wins: {player.wins}</li>
-          </ul></>
-          
-        ))}
-      </ol>
+      <div className = "player_stats_map">
+        <ol>
+          {player_stats.map((player) => (
+            <li className = "SB-li">
+              <div key = {player.username}>
+                {player.username}
+              </div>
+              <div key = {player.wins}>
+                wins: {player.wins}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     );
 }
 

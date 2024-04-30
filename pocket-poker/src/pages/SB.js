@@ -26,6 +26,9 @@ function SB() {
               <div key = {player.wins}>
                 wins: {player.wins}
               </div>
+              <div key = {player.losses}>
+                losses: {player.losses}
+              </div>
             </li>
           ))}
         </ol>

@@ -298,3 +298,18 @@ def checkAchievements(u_id, vals):
     else: #if in our csv file
         df.loc[row[0]] = dat
         df.to_csv(achFile, index = False)
+
+def updateWins():
+    for i in range(10):
+        count = supabase.table("transaction").select('id', count='exact').eq('winner_hand_id', i).execute().count
+        supabase.table('game_wins').update({'hand_wins': count}).eq('id', i).execute()
+
+def updateLosses():
+    for i in range(10):
+        count = supabase.table("transaction").select('id', count='exact').eq('losing_hand_id', i).execute().count
+        supabase.table('game_wins').update({'hand_losses': count}).eq('id', i).execute()
+
+# Slower because it has to call the database 20 times. Only call if needed.
+def updateStats():
+    updateWins()
+    updateLosses()

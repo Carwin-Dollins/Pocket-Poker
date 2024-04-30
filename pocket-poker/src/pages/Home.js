@@ -30,8 +30,10 @@ export const Home = () => {
     const handleResults = async (winner, prizePool, winningHandId, losingHandId) => {
         // Fetches the player's id
         const {data: userData} = await supabase.auth.getSession()
+        if (userData.session == null){ return; }
         const supabase_user_id = userData.session.user.id
         const player_id_query = await supabase.from('player_stats').select('id').eq('user_id', supabase_user_id)
+        if (userData.session == null){ return; }
         const player_id = player_id_query.data[0].id
         console.log(userData.session.user.id)
         
